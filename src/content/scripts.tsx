@@ -1,10 +1,5 @@
-// Extension.js content script template (JavaScript)
-// - Export a default function (required in v3) that mounts your UI
-// - Wrapper handles Shadow DOM isolation, CSS injection, HMR and cleanup
-// - Avoid adding your own HMR code; dev warnings will be shown if detected
-// Docs: https://extension.js.org/docs/content-scripts
-import {mount} from 'svelte'
-import ContentApp from './ContentApp.svelte'
+import {render} from 'preact'
+import ContentApp from './ContentApp'
 import './styles.css'
 
 console.log('[From the page context] Hello from content_scripts!')
@@ -15,6 +10,7 @@ console.log('[From the page context] Hello from content_scripts!')
  * Do not invoke it yourself.
  */
 export default function initial() {
+  // Create a new div element and append it to the document's body
   const rootDiv = document.createElement('div')
   rootDiv.setAttribute('data-extension-root', 'true')
   // Isolate the host from page styles (e.g. example.com ships div{opacity:.8},
@@ -33,15 +29,12 @@ export default function initial() {
 
   fetchCSS().then((response) => (styleElement.textContent = response))
 
-  // Create container for Svelte app
-  const contentDiv = document.createElement('div')
-  contentDiv.className = 'content_script'
-  shadowRoot.appendChild(contentDiv)
+  // Create container for Preact app
+  const container = document.createElement('div')
+  container.className = 'content_script'
+  shadowRoot.appendChild(container)
 
-  // Mount Svelte app using Svelte 5's mount function
-  mount(ContentApp, {
-    target: contentDiv
-  })
+  render(<ContentApp />, container)
 
   return () => {
     rootDiv.remove()

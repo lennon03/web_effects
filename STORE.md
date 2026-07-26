@@ -9,8 +9,8 @@ Last updated: 2026-07-20
 
 ## Listing
 
-- Name: Svelte Sidebar Example
-- Summary: Svelte-based extension with a sidebar panel.
+- Name: Preact Sidebar Example
+- Summary: Preact-based extension with a sidebar panel.
 - Description: TODO write two or three short paragraphs of user
   benefits. Describe what the user sees and gains, not how the code
   works.
@@ -31,7 +31,7 @@ Last updated: 2026-07-20
 
 ### Single purpose
 
-Svelte-based extension with a sidebar panel.
+Preact-based extension with a sidebar panel.
 
 ### Permissions justification
 
@@ -61,5 +61,5 @@ notes in most cases.
 
 ## Version history
 
-- 1.0.0 (unreleased): initial version from the svelte template.
+- 1.0.0 (unreleased): initial version from the preact template.
   Not yet submitted to any store.

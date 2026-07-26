@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "web_effects",
-  "description": "Svelte-based extension with sidebar panel",
+  "description": "Preact-based extension with sidebar panel",
   "version": "1.0.0",
   "license": "MIT",
   "type": "module",
@@ -11,10 +11,10 @@
     "url": "https://yourwebsite.com"
   },
   "dependencies": {
-    "svelte": "^5.15.0"
+    "preact": "^10.19.6"
   },
   "devDependencies": {
-    "@tsconfig/svelte": "5.0.4",
+    "@types/react": "^18.2.64",
     "typescript": "7.0.2",
     "extension": "^4.0.16"
   },

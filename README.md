@@ -2,7 +2,7 @@
 
 # web_effects
 
-> Svelte-based extension with a sidebar panel. Adds a sidebar with a simple page.
+> Preact-based extension with a sidebar panel. Adds a sidebar with a simple page.
 
 
 ![screenshot](./public/screenshot.png)

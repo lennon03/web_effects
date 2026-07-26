@@ -1,13 +1,12 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "@tsconfig/svelte/tsconfig.json",
   "compilerOptions": {
     "allowImportingTsExtensions": true,
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true,
+    "isolatedModules": false,
     "jsx": "react-jsx",
     "lib": ["dom", "dom.iterable", "esnext"],
     "moduleResolution": "bundler",
@@ -16,9 +15,15 @@
     "resolveJsonModule": true,
     "strict": true,
     "target": "esnext",
-    "verbatimModuleSyntax": false,
-    "useDefineForClassFields": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "baseUrl": "./",
+    "paths": {
+      "react": ["./node_modules/preact/compat/"],
+      "react/jsx-runtime": ["./node_modules/preact/jsx-runtime"],
+      "react-dom": ["./node_modules/preact/compat/"],
+      "react-dom/*": ["./node_modules/preact/compat/*"]
+    },
+    "verbatimModuleSyntax": false
   },
   "include": ["./", "extension-env.d.ts"],
   "exclude": ["node_modules", "dist"]

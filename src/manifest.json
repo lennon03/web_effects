@@ -13,7 +13,7 @@
     }
   },
   "name": "web_effects",
-  "description": "Svelte-based extension with a sidebar panel. Adds a sidebar with a simple page.",
+  "description": "Preact-based extension with a sidebar panel. Adds a sidebar with a simple page.",
   "icons": {
     "16": "images/icon.png",
     "32": "images/icon.png",
@@ -64,7 +64,7 @@
         "<all_urls>"
       ],
       "js": [
-        "content/scripts.ts"
+        "content/scripts.tsx"
       ]
     }
   ],
