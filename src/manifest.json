@@ -13,7 +13,7 @@
     }
   },
   "name": "web_effects",
-  "description": "JavaScript-based extension with a sidebar panel. Adds a sidebar with a simple page.",
+  "description": "Svelte-based extension with a sidebar panel. Adds a sidebar with a simple page.",
   "icons": {
     "16": "images/icon.png",
     "32": "images/icon.png",
@@ -53,9 +53,9 @@
     "sidePanel"
   ],
   "background": {
-    "chromium:service_worker": "background.js",
+    "chromium:service_worker": "background.ts",
     "firefox:scripts": [
-      "background.js"
+      "background.ts"
     ]
   },
   "content_scripts": [
@@ -64,7 +64,7 @@
         "<all_urls>"
       ],
       "js": [
-        "content/scripts.js"
+        "content/scripts.ts"
       ]
     }
   ],
