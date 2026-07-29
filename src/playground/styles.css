@@ -1,0 +1,148 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #141a2e;
+  --color-muted: #70788b;
+  --color-blue: #3977f6;
+}
+
+@layer base {
+  * { @apply box-border; }
+  html.playground_document { @apply min-w-0 bg-[#f2f3f6]; }
+  body.playground_body {
+    @apply m-0 min-h-screen min-w-0 overflow-x-hidden bg-[#f2f3f6] font-sans text-ink antialiased;
+    background-image:
+      radial-gradient(circle at 20% -10%, rgba(255,255,255,.95), transparent 36%),
+      radial-gradient(circle at 90% 30%, rgba(220,226,239,.48), transparent 30%);
+  }
+  .playground_body button, .playground_body input { font: inherit; }
+  .playground_body button:focus-visible, .playground_body input:focus-visible, .room_canvas:focus-visible {
+    @apply outline-2 outline-offset-2 outline-blue;
+  }
+}
+
+@layer components {
+  .playground { @apply mx-auto flex min-h-screen w-full max-w-[1500px] flex-col gap-5 p-4 sm:p-6; }
+  .topbar {
+    @apply relative z-10 flex min-h-[112px] items-center justify-between gap-5 rounded-[22px] border border-white/90 bg-white/80 px-6 py-5 shadow-[0_12px_36px_rgba(42,50,70,.10)] backdrop-blur-xl sm:px-9;
+  }
+  .brand { @apply flex min-w-0 items-center gap-5; }
+  .brand > div { @apply min-w-0; }
+  .brand h1 { @apply m-0 truncate text-xl font-bold tracking-[-.035em] sm:text-[27px]; }
+  .brand p { @apply mb-0 mt-1 text-sm text-muted sm:text-base; }
+  .spatial_mark { @apply relative block size-11 shrink-0 sm:size-12; }
+  .mark_core, .mark_dot { @apply absolute left-1/2 top-1/2 block -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue; }
+  .mark_core { @apply size-2.5; }
+  .mark_dot { @apply size-2; }
+  .dot_1 { transform: translate(-50%, -50%) translateY(-18px); }
+  .dot_2 { transform: translate(-50%, -50%) rotate(45deg) translateY(-18px); }
+  .dot_3 { transform: translate(-50%, -50%) rotate(90deg) translateY(-18px); }
+  .dot_4 { transform: translate(-50%, -50%) rotate(135deg) translateY(-18px); }
+  .dot_5 { transform: translate(-50%, -50%) rotate(180deg) translateY(-18px); }
+  .dot_6 { transform: translate(-50%, -50%) rotate(225deg) translateY(-18px); }
+  .dot_7 { transform: translate(-50%, -50%) rotate(270deg) translateY(-18px); }
+  .dot_8 { transform: translate(-50%, -50%) rotate(315deg) translateY(-18px); }
+  .header_actions { @apply flex shrink-0 items-center gap-3; }
+  .reset_button, .icon_button {
+    @apply h-12 rounded-xl border border-[#e0e3ea] bg-white text-sm font-semibold text-[#343949] shadow-[0_2px_6px_rgba(28,34,49,.04)] transition hover:-translate-y-px hover:border-[#cfd4df] hover:shadow-md;
+  }
+  .reset_button { @apply px-6; }
+  .icon_button { @apply grid w-12 place-items-center; }
+  .icon_button svg { @apply size-5 fill-none stroke-current stroke-[1.8]; }
+  .icon_button.is_active { @apply border-blue/30 bg-blue/5 text-blue; }
+
+  .room_panel {
+    @apply relative min-h-[760px] flex-1 overflow-hidden rounded-[28px] border border-white/90 bg-[#f5f6f8] shadow-[0_24px_70px_rgba(37,44,62,.13)];
+  }
+  .scene_host { @apply absolute inset-0; }
+  .room_canvas { @apply block size-full cursor-default touch-none; }
+  .room_canvas.is_hovering { @apply cursor-grab; }
+  .room_canvas.is_dragging { @apply cursor-grabbing; }
+  .scene_help {
+    @apply pointer-events-none absolute left-5 top-5 z-10 flex items-center gap-4 rounded-full border border-white/80 bg-white/70 px-4 py-2 text-[11px] font-medium text-muted shadow-sm backdrop-blur-md;
+  }
+  .scene_help span { @apply flex items-center gap-2; }
+  .scene_help i { @apply size-1.5 rounded-full bg-blue shadow-[0_0_0_4px_rgba(57,119,246,.12)]; }
+  .scene_label {
+    @apply pointer-events-none absolute z-[5] flex -translate-x-1/2 -translate-y-1/2 items-center gap-1.5 whitespace-nowrap rounded-md bg-white/72 px-1.5 py-0.5 text-[11px] text-[#4d5260] backdrop-blur-sm transition;
+  }
+  .scene_label b { @apply font-semibold; }
+  .scene_label span { @apply text-[9px] text-[#7b8290]; }
+  .scene_label.is_selected { @apply bg-blue text-white shadow-[0_4px_14px_rgba(57,119,246,.32)]; }
+  .scene_label.is_selected span { @apply text-white/80; }
+
+  .control_dock {
+    @apply absolute bottom-6 left-1/2 z-20 grid w-[min(760px,calc(100%-32px))] -translate-x-1/2 grid-cols-[1.15fr_repeat(3,1fr)] overflow-hidden rounded-[24px] border border-white/90 bg-white/88 px-3 py-5 shadow-[0_22px_55px_rgba(32,39,57,.22)] backdrop-blur-xl;
+  }
+  .selected_summary { @apply flex min-w-0 items-center gap-4 border-r border-[#e8e9ee] px-4; }
+  .selected_summary > div { @apply min-w-0; }
+  .selected_summary strong { @apply block truncate text-sm; }
+  .selected_summary small { @apply mt-1 block text-[11px] text-[#777e8c]; }
+  .channel_row { @apply mb-1 flex items-center gap-2; }
+  .channel_row b { @apply rounded-md bg-[#8267ef] px-1.5 py-0.5 text-[10px] font-bold text-white; }
+  .active_dot { @apply size-1.5 rounded-full bg-[#45ba66]; }
+  .mini_speaker {
+    @apply relative block h-[66px] w-10 shrink-0 rounded-lg bg-gradient-to-br from-[#393d43] to-[#15171b] shadow-[0_10px_17px_rgba(20,23,29,.25)];
+  }
+  .mini_speaker i { @apply absolute left-1/2 block -translate-x-1/2 rounded-full border-[3px] border-[#2c3036] bg-[#080a0d] shadow-inner; }
+  .mini_speaker i:first-child { @apply top-2 size-3; }
+  .mini_speaker i:last-child { @apply bottom-2 size-5; }
+
+  .dial { @apply relative flex min-w-0 flex-col items-center border-r border-[#e8e9ee] px-3 last:border-r-0; }
+  .dial_label { @apply text-[11px] font-medium text-[#626978]; }
+  .dial > strong { @apply mt-1 text-sm font-semibold text-[#272c38]; }
+  .dial_visual { @apply relative mt-1 block w-full max-w-[120px]; }
+  .dial_visual svg { @apply block w-full overflow-visible; }
+  .dial_track, .dial_progress { @apply fill-none stroke-[7] [stroke-linecap:round]; }
+  .dial_track { stroke: #e7e8ec; }
+  .dial_progress { stroke: #3977f6; }
+  .dial_violet .dial_progress { stroke: #7660ee; }
+  .dial_knob_shadow { @apply fill-black/10; transform: translateY(2px); }
+  .dial_knob { @apply fill-white stroke-[#dfe1e6] stroke-1; }
+  .dial_min, .dial_max { @apply absolute bottom-0 text-[9px] text-[#878d98]; }
+  .dial_min { @apply left-0; }
+  .dial_max { @apply right-0; }
+  .dial input { @apply absolute inset-0 z-10 size-full cursor-pointer opacity-0; }
+}
+
+@media (max-width: 760px) {
+  .playground { @apply gap-3 p-2; }
+  .topbar { @apply min-h-[88px] rounded-2xl px-4 py-3; }
+  .brand { @apply gap-3; }
+  .brand h1 { @apply text-lg; }
+  .brand p { @apply text-xs; }
+  .spatial_mark { @apply size-10; }
+  .dot_1 { transform: translate(-50%, -50%) translateY(-15px); }
+  .dot_2 { transform: translate(-50%, -50%) rotate(45deg) translateY(-15px); }
+  .dot_3 { transform: translate(-50%, -50%) rotate(90deg) translateY(-15px); }
+  .dot_4 { transform: translate(-50%, -50%) rotate(135deg) translateY(-15px); }
+  .dot_5 { transform: translate(-50%, -50%) rotate(180deg) translateY(-15px); }
+  .dot_6 { transform: translate(-50%, -50%) rotate(225deg) translateY(-15px); }
+  .dot_7 { transform: translate(-50%, -50%) rotate(270deg) translateY(-15px); }
+  .dot_8 { transform: translate(-50%, -50%) rotate(315deg) translateY(-15px); }
+  .reset_button { @apply h-10 px-3; }
+  .icon_button { @apply size-10; }
+  .room_panel { @apply min-h-[720px] rounded-2xl; }
+  .scene_help { @apply left-3 top-3; }
+  .scene_help span:last-child { @apply hidden; }
+  .control_dock {
+    @apply bottom-3 w-[calc(100%-20px)] grid-cols-3 rounded-2xl px-2 py-3;
+  }
+  .selected_summary { @apply col-span-3 mb-3 border-b border-r-0 px-3 pb-3; }
+  .mini_speaker { @apply h-12 w-8; }
+  .dial { @apply px-1.5; }
+  .dial_visual { @apply max-w-[96px]; }
+}
+
+@media (max-width: 480px) {
+  .brand p { @apply hidden; }
+  .brand h1 { @apply max-w-[170px] text-base; }
+  .header_actions { @apply gap-2; }
+  .room_panel { @apply min-h-[650px]; }
+  .scene_help { @apply text-[10px]; }
+  .dial > strong { @apply text-xs; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+}
