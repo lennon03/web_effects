@@ -22,6 +22,7 @@ interface SpeakerObject {
 
 const LISTENER_Z = 1.55
 const SPEAKER_RADIUS = 5.15
+const REAR_SPEAKER_RADIUS = 3.15
 
 function createMaterial(color: number, roughness = 0.72, metalness = 0.02) {
   return new THREE.MeshStandardMaterial({color, roughness, metalness})
@@ -390,8 +391,11 @@ export default function SpatialScene(props: SpatialSceneProps) {
         const object = objects.get(speaker.id)
         if (!object) continue
         const radians = speaker.azimuth * Math.PI / 180
-        const x = Math.sin(radians) * SPEAKER_RADIUS
-        const z = LISTENER_Z - Math.cos(radians) * SPEAKER_RADIUS
+        const radius = speaker.id === 'RL' || speaker.id === 'RR'
+          ? REAR_SPEAKER_RADIUS
+          : SPEAKER_RADIUS
+        const x = Math.sin(radians) * radius
+        const z = LISTENER_Z - Math.cos(radians) * radius
         const elevationLift = Math.sin(speaker.elevation * Math.PI / 180) * 1.2
         const isSelected = speaker.id === current.selectedId
         object.group.position.set(x, 0.56 + elevationLift, z)
