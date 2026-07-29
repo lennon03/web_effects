@@ -1,23 +1,17 @@
-@import "tailwindcss";
-
-@theme {
-  --color-ink: #141a2e;
-  --color-muted: #70788b;
-  --color-blue: #3977f6;
-}
+@reference "tailwindcss";
 
 @layer base {
   * { @apply box-border; }
   html.playground_document { @apply min-w-0 bg-[#f2f3f6]; }
   body.playground_body {
-    @apply m-0 min-h-screen min-w-0 overflow-x-hidden bg-[#f2f3f6] font-sans text-ink antialiased;
+    @apply m-0 min-h-screen min-w-0 overflow-x-hidden bg-[#f2f3f6] font-sans text-[#141a2e] antialiased;
     background-image:
       radial-gradient(circle at 20% -10%, rgba(255,255,255,.95), transparent 36%),
       radial-gradient(circle at 90% 30%, rgba(220,226,239,.48), transparent 30%);
   }
   .playground_body button, .playground_body input { font: inherit; }
   .playground_body button:focus-visible, .playground_body input:focus-visible, .room_canvas:focus-visible {
-    @apply outline-2 outline-offset-2 outline-blue;
+    @apply outline-2 outline-offset-2 outline-[#3977f6];
   }
 }
 
@@ -29,9 +23,9 @@
   .brand { @apply flex min-w-0 items-center gap-5; }
   .brand > div { @apply min-w-0; }
   .brand h1 { @apply m-0 truncate text-xl font-bold tracking-[-.035em] sm:text-[27px]; }
-  .brand p { @apply mb-0 mt-1 text-sm text-muted sm:text-base; }
+  .brand p { @apply mb-0 mt-1 text-sm text-[#70788b] sm:text-base; }
   .spatial_mark { @apply relative block size-11 shrink-0 sm:size-12; }
-  .mark_core, .mark_dot { @apply absolute left-1/2 top-1/2 block -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue; }
+  .mark_core, .mark_dot { @apply absolute left-1/2 top-1/2 block -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#3977f6]; }
   .mark_core { @apply size-2.5; }
   .mark_dot { @apply size-2; }
   .dot_1 { transform: translate(-50%, -50%) translateY(-18px); }
@@ -49,7 +43,7 @@
   .reset_button { @apply px-6; }
   .icon_button { @apply grid w-12 place-items-center; }
   .icon_button svg { @apply size-5 fill-none stroke-current stroke-[1.8]; }
-  .icon_button.is_active { @apply border-blue/30 bg-blue/5 text-blue; }
+  .icon_button.is_active { @apply border-[#3977f6]/30 bg-[#3977f6]/5 text-[#3977f6]; }
 
   .room_panel {
     @apply relative min-h-[760px] flex-1 overflow-hidden rounded-[28px] border border-white/90 bg-[#f5f6f8] shadow-[0_24px_70px_rgba(37,44,62,.13)];
@@ -59,16 +53,16 @@
   .room_canvas.is_hovering { @apply cursor-grab; }
   .room_canvas.is_dragging { @apply cursor-grabbing; }
   .scene_help {
-    @apply pointer-events-none absolute left-5 top-5 z-10 flex items-center gap-4 rounded-full border border-white/80 bg-white/70 px-4 py-2 text-[11px] font-medium text-muted shadow-sm backdrop-blur-md;
+    @apply pointer-events-none absolute left-5 top-5 z-10 flex items-center gap-4 rounded-full border border-white/80 bg-white/70 px-4 py-2 text-[11px] font-medium text-[#70788b] shadow-sm backdrop-blur-md;
   }
   .scene_help span { @apply flex items-center gap-2; }
-  .scene_help i { @apply size-1.5 rounded-full bg-blue shadow-[0_0_0_4px_rgba(57,119,246,.12)]; }
+  .scene_help i { @apply size-1.5 rounded-full bg-[#3977f6] shadow-[0_0_0_4px_rgba(57,119,246,.12)]; }
   .scene_label {
     @apply pointer-events-none absolute z-[5] flex -translate-x-1/2 -translate-y-1/2 items-center gap-1.5 whitespace-nowrap rounded-md bg-white/72 px-1.5 py-0.5 text-[11px] text-[#4d5260] backdrop-blur-sm transition;
   }
   .scene_label b { @apply font-semibold; }
   .scene_label span { @apply text-[9px] text-[#7b8290]; }
-  .scene_label.is_selected { @apply bg-blue text-white shadow-[0_4px_14px_rgba(57,119,246,.32)]; }
+  .scene_label.is_selected { @apply bg-[#3977f6] text-white shadow-[0_4px_14px_rgba(57,119,246,.32)]; }
   .scene_label.is_selected span { @apply text-white/80; }
 
   .control_dock {
