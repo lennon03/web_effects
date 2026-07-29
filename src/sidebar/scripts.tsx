@@ -1,11 +1,15 @@
 import {render} from 'preact'
 import SidebarApp from './SidebarApp'
+import {renderPlayground} from '../playground/scripts'
 import './styles.css'
-
-console.log('[From the sidebar page context] Hello regular page!')
 
 const rootElement = document.getElementById('root')
 if (!rootElement) {
-  throw new Error('Sidebar root element not found')
+  throw new Error('Extension page root element not found')
 }
-render(<SidebarApp />, rootElement as HTMLElement)
+
+if (location.pathname.endsWith('/playground/index.html')) {
+  renderPlayground(rootElement)
+} else {
+  render(<SidebarApp />, rootElement as HTMLElement)
+}

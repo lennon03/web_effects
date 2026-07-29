@@ -22,6 +22,10 @@
   .app_header { @apply flex items-end justify-between px-1 pb-1; }
   .app_header h1 { @apply m-0 text-3xl font-semibold tracking-[-0.04em]; }
   .eyebrow { @apply mb-1 mt-0 text-[10px] font-bold uppercase tracking-[0.2em] text-lime; }
+  .header_actions { @apply flex items-center gap-2; }
+  .spatial_button { @apply inline-flex h-10 items-center gap-2 rounded-full border border-line bg-panel px-3 text-[10px] font-semibold text-fog transition-colors hover:border-lime hover:text-lime; }
+  .spatial_button svg { @apply size-3.5 fill-none stroke-current stroke-[1.75]; }
+  .spatial_button svg circle { @apply fill-current stroke-none; }
   .power_button { @apply grid size-10 place-items-center rounded-full border border-line bg-panel text-fog transition-colors hover:border-lime hover:text-lime; }
   .power_button svg { @apply size-4 fill-none stroke-current stroke-2; }
 
