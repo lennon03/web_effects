@@ -14,13 +14,16 @@
     "preact": "^10.19.6"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
     "@types/react": "^18.2.64",
-    "typescript": "7.0.2",
-    "extension": "^4.0.16"
+    "extension": "^4.0.16",
+    "postcss": "^8.5.23",
+    "tailwindcss": "^4.3.3",
+    "typescript": "7.0.2"
   },
   "scripts": {
-    "dev": "extension dev",
-    "start": "extension start",
+    "dev": "extension dev --browser chrome",
+    "start": "extension start --browser chrome",
     "build": "extension build",
     "preview": "extension preview",
     "build:chrome": "extension build --browser chrome",

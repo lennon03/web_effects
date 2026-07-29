@@ -1,60 +1,79 @@
-/* @import 'sakura.css'; */
+@import "tailwindcss";
 
-:root {
-  --sidebar-margin: 1rem;
-  --sidebar-bg: #0a0c10;
-  --sidebar-text: #c9c9c9;
-  --sidebar-link: #e5e7eb;
-  --sidebar-border: #c9c9c9;
+@theme {
+  --color-ink: #10120f;
+  --color-panel: #181b17;
+  --color-panel-soft: #20241f;
+  --color-line: #30352e;
+  --color-lime: #a6ff64;
+  --color-fog: #9ca393;
 }
 
-body {
-  background-color: var(--sidebar-bg);
-  color: var(--sidebar-text);
-  height: 100vh;
-  margin: var(--sidebar-margin);
-  border-radius: 6px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
+@layer base {
+  * { @apply box-border; }
+  html { @apply bg-ink; }
+  body { @apply m-0 min-h-screen bg-ink font-sans text-white antialiased; }
+  button { font: inherit; }
+  button:focus-visible { @apply outline-2 outline-offset-2 outline-lime; }
 }
 
-.sidebar_app {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0 1rem;
-  text-align: center;
-  max-height: 100vh;
-  overflow-y: auto;
+@layer components {
+  .sidebar_app { @apply mx-auto flex min-h-screen w-full max-w-3xl flex-col gap-4 px-4 py-5; }
+  .app_header { @apply flex items-end justify-between px-1 pb-1; }
+  .app_header h1 { @apply m-0 text-3xl font-semibold tracking-[-0.04em]; }
+  .eyebrow { @apply mb-1 mt-0 text-[10px] font-bold uppercase tracking-[0.2em] text-lime; }
+  .power_button { @apply grid size-10 place-items-center rounded-full border border-line bg-panel text-fog transition-colors hover:border-lime hover:text-lime; }
+  .power_button svg { @apply size-4 fill-none stroke-current stroke-2; }
+
+  .eq_panel, .convolver_panel { @apply overflow-hidden rounded-2xl border border-line bg-panel; }
+  .section_heading { @apply flex items-center justify-between px-5 py-4; }
+  .section_heading h2 { @apply m-0 text-base font-semibold tracking-tight; }
+  .section_heading p:not(.eyebrow) { @apply mb-0 mt-1 text-xs text-fog; }
+  .gain_readout { @apply flex flex-col items-end gap-0.5; }
+  .gain_readout span { @apply text-[10px] uppercase tracking-widest text-fog; }
+  .gain_readout strong { @apply font-mono text-xs font-medium text-white; }
+
+  .eq_controls { @apply relative grid grid-cols-[4.5rem_minmax(0,1fr)] border-t border-line bg-panel-soft/50; }
+  .control_labels { @apply grid grid-rows-[3rem_9.75rem_2.75rem_2.75rem] border-r border-line bg-panel px-3 text-[9px] font-semibold uppercase tracking-wider text-fog; }
+  .control_labels span { @apply flex items-center; }
+  .bands_scroller { @apply overflow-x-auto overscroll-x-contain; scrollbar-color: #4b5347 transparent; scrollbar-width: thin; }
+  .bands { @apply grid w-max grid-flow-col auto-cols-[6.75rem]; }
+  .band { @apply grid grid-rows-[3rem_9.75rem_2.75rem_2.75rem] border-r border-line last:border-r-0; }
+  .filter_button { @apply relative grid place-items-center border-b border-line text-fog transition-colors hover:bg-panel hover:text-lime; }
+  .filter_button svg { @apply size-6 fill-none stroke-current stroke-[1.75]; }
+  .filter_axis { @apply opacity-30; }
+  .band_number { @apply absolute right-2 top-2 grid size-4 place-items-center rounded-full bg-lime text-[8px] font-bold text-ink; }
+  .gain_control { @apply flex flex-col items-center justify-center gap-2 border-b border-line; }
+  .gain_track { @apply relative h-24 w-1 rounded-full bg-[#353a33]; }
+  .gain_fill { @apply absolute bottom-0 left-0 w-full rounded-full bg-lime; }
+  .gain_track i { @apply absolute left-1/2 h-3.5 w-6 -translate-x-1/2 -translate-y-1/2 rounded border-2 border-panel bg-white shadow-[0_1px_4px_rgba(0,0,0,.45)]; }
+  .gain_control > span { @apply font-mono text-[10px] text-white; }
+  .gain_control small { @apply text-[8px] text-fog; }
+  .stepper { @apply m-1.5 grid grid-cols-[1.6rem_1fr_1.6rem] overflow-hidden rounded-md border border-line bg-panel; }
+  .stepper button { @apply grid min-w-0 place-items-center bg-transparent text-sm text-fog transition-colors hover:bg-panel-soft hover:text-lime; }
+  .stepper span { @apply flex min-w-0 items-center justify-center gap-0.5 border-x border-line font-mono text-[10px] text-white; }
+  .stepper small { @apply text-[7px] text-fog; }
+  .scroll_hint { @apply pointer-events-none absolute bottom-1 right-2 flex items-center gap-0.5 bg-gradient-to-l from-panel-soft via-panel-soft px-1 text-[8px] text-fog sm:hidden; }
+  .scroll_hint svg { @apply size-3 fill-none stroke-current stroke-2; }
+
+  .convolver_panel { @apply mb-1; }
+  .status_badge { @apply inline-flex items-center gap-1.5 rounded-full border border-line px-2.5 py-1 text-[10px] text-fog; }
+  .status_badge i { @apply size-1.5 rounded-full bg-lime shadow-[0_0_8px_#a6ff64]; }
+  .impulse_dropzone { @apply mx-3 flex min-h-28 items-center gap-4 rounded-xl border border-dashed border-[#454b41] bg-[#131512] p-4 transition-colors hover:border-fog; }
+  .waveform { @apply flex h-12 w-16 shrink-0 items-center justify-center gap-0.5; }
+  .waveform i { @apply w-0.5 min-h-1 rounded-full bg-lime/75; }
+  .impulse_copy { @apply flex min-w-0 flex-1 flex-col gap-1; }
+  .impulse_copy strong { @apply text-sm font-medium; }
+  .impulse_copy span { @apply text-[10px] text-fog; }
+  .load_button { @apply shrink-0 rounded-lg bg-lime px-3.5 py-2 text-xs font-bold text-ink transition-colors hover:bg-white; }
+  .convolver_footer { @apply mt-3 flex items-center justify-between border-t border-line px-5 py-3 text-[10px] text-fog; }
+  .convolver_footer div { @apply flex items-center gap-3; }
+  .convolver_footer strong { @apply font-mono font-medium text-white; }
 }
 
-.sidebar_logo {
-  width: 72px;
-  margin: 0 auto 1rem;
-}
-
-.sidebar_title {
-  font-size: 1.85em;
-  line-height: 1.1;
-  font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
-    Arial, "Noto Sans", sans-serif;
-  font-weight: 700;
-  margin: 0;
-  text-align: center;
-}
-
-.sidebar_description {
-  font-size: small;
-  margin: 0.5rem 0 0;
-  text-align: center;
-}
-
-.sidebar_description a {
-  text-decoration: none;
-  border-bottom: 2px solid var(--sidebar-border);
-  color: var(--sidebar-link);
-  margin: 0;
+@media (max-width: 420px) {
+  .sidebar_app { @apply px-3 py-4; }
+  .impulse_dropzone { @apply flex-wrap gap-3; }
+  .impulse_copy { @apply basis-[calc(100%-5rem)]; }
+  .load_button { @apply ml-20; }
 }
